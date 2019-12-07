@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 import 'FirestoreService.dart';
 import 'Note.dart';
+import 'AddNote.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -60,6 +61,14 @@ class _HomeState extends State<Home> {
               );
             }
       }
+      ),
+
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+        backgroundColor: Colors.green,
+        onPressed: (){
+            Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>AddNote()));
+        },
       ),
 
 
