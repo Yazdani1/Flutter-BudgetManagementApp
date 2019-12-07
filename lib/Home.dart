@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
+import 'FirestoreService.dart';
+import 'Note.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -8,21 +10,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-
-  Future<Null>getRefresh()async{
-    await Future.delayed(Duration(seconds: 3));
-    setState(() {
-      getallPost();
-    });
-  }
-
-
-  Future getallPost()async{
-    var fr=Firestore.instance;
-    QuerySnapshot snapshot= await fr.collection("note").getDocuments();
-    return snapshot.documents;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,43 +20,48 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.green,
       ),
 
-      body: FutureBuilder(
-          future: getallPost(),
-        builder: (context, snapshot){
-
-            if(snapshot.connectionState==ConnectionState.waiting){
+      body: StreamBuilder(
+          stream: FirestoreService().getNote(),
+          builder: (context, AsyncSnapshot<List<Note>> snapshot){
+            if(snapshot.hasError || !snapshot.hasData){
               return Center(
                 child: CircularProgressIndicator(),
               );
             }else{
-              return RefreshIndicator(
-                onRefresh: getRefresh,
-                child: ListView.builder(
-                  itemCount: (snapshot.data.length),
-                  itemBuilder: (context,index){
-                    return Container(
-                      margin: EdgeInsets.all(10.0),
-                      height: 150.0,
-                      child: Card(
-                        elevation: 10.0,
-                        child: Column(
-                          children: <Widget>[
+              return ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (context,index){
+                  Note note=snapshot.data[index];
+                  return Container(
+                    margin: EdgeInsets.all(8.0),
+                    height: 150.0,
+                    child: Card(
+                      elevation: 10.0,
+                      child: Column(
+                        children: <Widget>[
 
-                            Text(snapshot.data[index].data["title"]),
-                            SizedBox(height: 10.0,),
-                            Text(snapshot.data[index].data["des"])
+                          Text(note.title,style: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.black
+                          ),
+                          ),
+                          SizedBox(height: 10.0,),
 
-                          ],
-                        ),
+                          Text(note.description,style: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.deepOrange
+                          ),)
+
+                        ],
                       ),
-                    );
-                  }
-                ),
+                    ),
+                  );
+                }
               );
             }
-
-        }
+      }
       ),
+
 
     );
   }
