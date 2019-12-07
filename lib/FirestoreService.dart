@@ -16,13 +16,13 @@ class FirestoreService {
 
   Stream<List<Note>> getNote() {
     return db.collection("note").snapshots().map((snapshot) =>
-        snapshot.documents.map((doc) => Note.fromMap(doc.data, doc.documentID))
+        snapshot.documents.map((doc) => Note.getIncomeData(doc.data, doc.documentID))
             .toList()
     );
   }
 
   Future<void>addNote(Note note){
-  return db.collection("note").add(note.addNote());
+  return db.collection("note").add(note.addIncomeNote());
   }
 
   Future<void>deleteNote(String id){
@@ -30,9 +30,7 @@ class FirestoreService {
   }
 
   Future<void>updateNote(Note note){
-    return db.collection("note").document(note.id).updateData(note.addNote());
+    return db.collection("note").document(note.id).updateData(note.addIncomeNote());
   }
-
-
 
 }

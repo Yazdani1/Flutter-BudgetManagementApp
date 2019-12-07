@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Note.dart';
 import 'FirestoreService.dart';
+import 'package:intl/intl.dart';
 
 
 class AddNote extends StatefulWidget {
@@ -10,22 +11,29 @@ class AddNote extends StatefulWidget {
 
 class _AddNoteState extends State<AddNote> {
 
+  final DateTime _currenttime=new DateTime.now();
+
   GlobalKey<FormState>_globalKey=GlobalKey<FormState>();
 
   TextEditingController title;
   TextEditingController description;
+  TextEditingController amount;
 
   @override
   void initState() {
     super.initState();
     title=TextEditingController(text: '');
     description=TextEditingController(text: '');
+    amount=TextEditingController(text: '');
   }
 
 
 
   @override
   Widget build(BuildContext context) {
+
+    String formateDate= new DateFormat.yMMMd().format(_currenttime);
+
     return new Scaffold(
       appBar: AppBar(
         title: Text("Add your Data"),
@@ -70,6 +78,22 @@ class _AddNoteState extends State<AddNote> {
                     }
                   },
                 ),
+                SizedBox(height: 6.0,),
+                TextFormField(
+                  controller: amount,
+                  keyboardType: TextInputType.numberWithOptions(),
+                  decoration: InputDecoration(
+                    labelText: "Amount",
+                    border: OutlineInputBorder(
+                     borderRadius: BorderRadius.circular(20.0)
+                    )
+                  ),
+                  validator: (value){
+                    if(value == null || value.isEmpty){
+                      return "Amount can not be empty";
+                    }
+                  },
+                ),
                 SizedBox(height: 15.0,),
                 ButtonTheme(
                   height: 60.0,
@@ -86,7 +110,12 @@ class _AddNoteState extends State<AddNote> {
                     onPressed: ()async{
                         if(_globalKey.currentState.validate()){
                           try{
-                            Note note=Note(title: title.text,description: description.text);
+                            Note note=Note(
+                                title: title.text,
+                                description: description.text,
+                                amount: amount.text,
+                                date: formateDate
+                            );
 
                             await FirestoreService().addNote(note);
 
