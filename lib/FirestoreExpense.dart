@@ -19,15 +19,12 @@ class FirestoreExpense{
             .toList()
     );
   }
-
   Future<void>addExpenseNote(ExpenseNote note){
   return db.collection("expensenote").add(note.addExpenseNote());
   }
-
   Future<void>deleteNote(String id){
   return db.collection("expensenote").document(id).delete();
   }
-
   Future<void>updateNote(ExpenseNote note){
   return db.collection("expensenote").document(note.id).updateData(note.addExpenseNote());
   }
