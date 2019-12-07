@@ -70,9 +70,7 @@ class _AddNoteState extends State<AddNote> {
                     }
                   },
                 ),
-
                 SizedBox(height: 15.0,),
-
                 ButtonTheme(
                   height: 60.0,
                   minWidth: MediaQuery.of(context).size.width/1,
@@ -100,11 +98,6 @@ class _AddNoteState extends State<AddNote> {
                     },
                   ),
                 )
-
-
-
-
-
               ],
             ),
           ),
