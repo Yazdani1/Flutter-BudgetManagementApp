@@ -40,108 +40,113 @@ class _IncomeState extends State<Income> {
                           foregroundColor: Colors.white,
                           color: Color(0xFF272B4A),
                           icon: Icons.more_horiz,
-                          onTap: () => shoCuportionDialog(context,note),
+                          onTap: () => shoCuportionDialog(context, note),
                         ),
                       ],
 
-                      child: Container(
-                        margin: EdgeInsets.all(7.0),
-                        height: 150.0,
-                        color: Color(0xFF272B4A),
-                        child: Card(
-                          elevation: 10.0,
+                      child: InkWell(
+                        onTap: () =>
+                            customDialog(context, note.title, note.description,
+                                note.amount),
+                        child: Container(
+                          margin: EdgeInsets.all(7.0),
+                          height: 150.0,
                           color: Color(0xFF272B4A),
-                          child: Row(
-                            children: <Widget>[
+                          child: Card(
+                            elevation: 10.0,
+                            color: Color(0xFF272B4A),
+                            child: Row(
+                              children: <Widget>[
 
-                              Expanded(
-                                flex: 5,
-                                child: Container(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment
-                                        .start,
-                                    children: <Widget>[
-                                      Container(
-                                        child: Row(
-                                          children: <Widget>[
-                                            Expanded(
-                                              flex: 1,
-                                              child: CircleAvatar(
+                                Expanded(
+                                  flex: 5,
+                                  child: Container(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .start,
+                                      children: <Widget>[
+                                        Container(
+                                          child: Row(
+                                            children: <Widget>[
+                                              Expanded(
+                                                flex: 1,
+                                                child: CircleAvatar(
+                                                  child: Text(
+                                                    note.title.toUpperCase()[0],
+                                                    style: TextStyle(
+                                                        fontSize: 20.0
+                                                    ),
+                                                  ),
+                                                  backgroundColor: Colors.amber,
+                                                  foregroundColor: Colors.black,
+                                                ),
+                                              ),
+                                              SizedBox(width: 7.0,),
+                                              Expanded(
+                                                flex: 5,
                                                 child: Text(
-                                                  note.title.toUpperCase()[0],
+                                                  note.title.toUpperCase(),
+                                                  maxLines: 1,
                                                   style: TextStyle(
-                                                      fontSize: 20.0
+                                                      fontSize: 20.0,
+                                                      color: Colors.white
                                                   ),
                                                 ),
-                                                backgroundColor: Colors.amber,
-                                                foregroundColor: Colors.black,
-                                              ),
-                                            ),
-                                            SizedBox(width: 7.0,),
-                                            Expanded(
-                                              flex: 5,
-                                              child: Text(
-                                                note.title.toUpperCase(),
-                                                maxLines: 1,
-                                                style: TextStyle(
-                                                    fontSize: 20.0,
-                                                    color: Colors.white
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(height: 7.0,),
-                                      Container(
-                                        margin: EdgeInsets.all(5.0),
-                                        child: Text(note.date,
-                                          style: TextStyle(
-                                              fontSize: 15.0,
-                                              color: Colors.white
+                                              )
+                                            ],
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(height: 2.0,),
-                                      Container(
-                                        margin: EdgeInsets.all(5.0),
-                                        child: Text(note.description,
-                                          maxLines: 2,
-                                          style: TextStyle(
-                                              fontSize: 17.0,
-                                              color: Colors.white
-                                          ),),
-                                      )
-
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              SizedBox(width: 6.0,),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  child: Row(
-                                    children: <Widget>[
-                                      Text(note.amount,
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                            fontSize: 20.0,
-                                            color: Colors.amber
+                                        SizedBox(height: 7.0,),
+                                        Container(
+                                          margin: EdgeInsets.all(5.0),
+                                          child: Text(note.date,
+                                            style: TextStyle(
+                                                fontSize: 15.0,
+                                                color: Colors.white
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(width: 3.0,),
-                                      Icon(Icons.arrow_upward,
-                                        size: 25.0,
-                                        color: Colors.green,
-                                      )
-                                    ],
+                                        SizedBox(height: 2.0,),
+                                        Container(
+                                          margin: EdgeInsets.all(5.0),
+                                          child: Text(note.description,
+                                            maxLines: 2,
+                                            style: TextStyle(
+                                                fontSize: 17.0,
+                                                color: Colors.white
+                                            ),),
+                                        )
+
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              )
 
-                            ],
+                                SizedBox(width: 6.0,),
+                                Expanded(
+                                  flex: 2,
+                                  child: Container(
+                                    child: Row(
+                                      children: <Widget>[
+                                        Text(note.amount,
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              color: Colors.amber
+                                          ),
+                                        ),
+                                        SizedBox(width: 3.0,),
+                                        Icon(Icons.arrow_upward,
+                                          size: 25.0,
+                                          color: Colors.green,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -165,22 +170,22 @@ class _IncomeState extends State<Income> {
     );
   }
 
-  shoCuportionDialog(BuildContext context,Note note) {
+  shoCuportionDialog(BuildContext context, Note note) {
     showCupertinoModalPopup(
         context: context,
         builder: (context) {
           return CupertinoActionSheet(
             title: new Text("Edit and Delete",
-            style: TextStyle(
-              fontSize: 20.0,
-              color: Colors.black
-            ),
+              style: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.black
+              ),
             ),
             message: new Text("Either edit your data or delete your data",
-            style: TextStyle(
-              fontSize: 18.0,
-              color: Colors.black
-            ),
+              style: TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.black
+              ),
             ),
             cancelButton: new CupertinoActionSheetAction(
                 onPressed: () {
@@ -198,7 +203,7 @@ class _IncomeState extends State<Income> {
                 ),
               ),
               new CupertinoActionSheetAction(
-                  onPressed: () async{
+                  onPressed: () async {
                     Navigator.of(context).pop();
                     await FirestoreService().deleteNote(note.id);
                   },
@@ -211,5 +216,88 @@ class _IncomeState extends State<Income> {
         }
     );
   }
+
+  customDialog(BuildContext context, String title, String description,
+      String amount) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)
+            ),
+            child: SingleChildScrollView(
+              child: Container(
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height / 1.5,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  color: Color(0xFF222240),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+
+                    Container(
+                      height: 75.0,
+                      decoration: BoxDecoration(
+                        borderRadius: new BorderRadius.circular(15.0),
+                        gradient: LinearGradient(
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomLeft,
+                          colors: [
+                            //Colors.black[100],
+                            Colors.deepOrange[900],
+                            Colors.blueGrey[700],
+                          ],
+                        ),
+                      ),
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(amount,style: TextStyle(
+                              fontSize: 20.0,
+                              color: Colors.white
+                            ),),
+                            SizedBox(width: 6.0,),
+                            Icon(Icons.arrow_upward,color: Colors.green,size: 25.0,)
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(height: 10.0,),
+
+                    Container(
+                      margin: EdgeInsets.only(left: 10.0),
+                      child: Text(title,
+                        style: TextStyle(fontSize: 20.0, color: Colors.white),),
+                    ),
+                    SizedBox(height: 10.0,),
+
+                    Container(
+                      margin: EdgeInsets.only(left: 10.0),
+                      child: Text(description,
+                        style: TextStyle(fontSize: 17.0, color: Colors.white),),
+                    ),
+
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+    );
+  }
+
+
 }
 

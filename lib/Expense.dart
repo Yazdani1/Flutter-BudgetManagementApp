@@ -133,9 +133,9 @@ class _ExpenseState extends State<Expense> {
                                         ),
                                       ),
                                       SizedBox(width: 3.0,),
-                                      Icon(Icons.arrow_upward,
+                                      Icon(Icons.arrow_downward,
                                         size: 25.0,
-                                        color: Colors.green,
+                                        color: Colors.red,
                                       )
                                     ],
                                   ),

@@ -118,13 +118,13 @@ class _AddExpenseNote extends State<AddExpenseNote> {
                               amount: amount.text,
                               date: formateDate
                           );
-
+                          Navigator.of(context).pop();
                           await FirestoreExpense().addExpenseNote(note);
 
                         }catch(e){
                           print(e);
                         }
-                        Navigator.of(context).pop();
+
                       }
                     },
                   ),

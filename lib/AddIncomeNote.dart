@@ -116,13 +116,13 @@ class _AddNoteState extends State<AddNote> {
                                 amount: amount.text,
                                 date: formateDate
                             );
-
+                            Navigator.of(context).pop();
                             await FirestoreService().addNote(note);
 
                           }catch(e){
                             print(e);
                           }
-                          Navigator.of(context).pop();
+
                         }
                     },
                   ),
