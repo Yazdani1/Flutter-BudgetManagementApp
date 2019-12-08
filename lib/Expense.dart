@@ -44,7 +44,6 @@ class _ExpenseState extends State<Expense> {
                           onTap: () => shoCuportionDialog(context, note),
                         ),
                       ],
-
                       child: InkWell(
                         onTap: () {
                           customDialog(
