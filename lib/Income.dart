@@ -197,6 +197,7 @@ class _IncomeState extends State<Income> {
               new CupertinoActionSheetAction(
                 onPressed: () {
                   Navigator.of(context).pop();
+                  Navigator.of(context).push(new MaterialPageRoute(builder: (c)=>AddNote(note: note,)));
                 },
                 child: new Text("Edit",
                   style: TextStyle(fontSize: 22.0, color: Colors.black),

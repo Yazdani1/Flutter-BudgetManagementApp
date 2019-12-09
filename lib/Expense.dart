@@ -16,26 +16,6 @@ class Expense extends StatefulWidget {
 
 class _ExpenseState extends State<Expense> {
 
-  Note expenseNote;
-
-  final DateTime _currenttime = new DateTime.now();
-
-  GlobalKey<FormState>_globalKey = GlobalKey<FormState>();
-
-  TextEditingController title;
-  TextEditingController description;
-  TextEditingController amount;
-
-  @override
-  void initState() {
-    super.initState();
-    title = TextEditingController(text: isEdating ? expenseNote.title:'');
-    description = TextEditingController(text: isEdating ? expenseNote.description:'');
-    amount = TextEditingController(text: isEdating ? expenseNote.amount:'');
-  }
-
-  get isEdating => expenseNote!= null;
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -183,7 +163,8 @@ class _ExpenseState extends State<Expense> {
         child: Icon(Icons.add),
         backgroundColor: Colors.amber,
         onPressed: () {
-          Navigator.of(context).push(new MaterialPageRoute(builder: (c)=>AddExpenseNote()));
+          Navigator.of(context).push(
+              new MaterialPageRoute(builder: (c) => AddExpenseNote()));
         },
       ),
 
@@ -215,8 +196,10 @@ class _ExpenseState extends State<Expense> {
             ),
             actions: <Widget>[
               new CupertinoActionSheetAction(
-                onPressed: () async{
+                onPressed: () async {
                   Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                      new MaterialPageRoute(builder: (context) =>AddExpenseNote(expenseNote: note,)));
                 },
                 child: new Text("Edit",
                   style: TextStyle(fontSize: 22.0, color: Colors.black),

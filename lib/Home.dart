@@ -21,7 +21,6 @@ class _HomeState extends State<Home> {
 
     Expense(),
     Income(),
-    Chart()
 
   ];
 
@@ -32,7 +31,7 @@ class _HomeState extends State<Home> {
     return new Scaffold(
 
       appBar: AppBar(
-        title: Text("Budget"),
+        title: Text("Budget Management"),
         backgroundColor: Color(0xFF272B4A),
       ),
 
@@ -50,8 +49,6 @@ class _HomeState extends State<Home> {
         items: <Widget>[
           Icon(Icons.remove, size: 30, color: Colors.white,),
           Icon(Icons.add, size: 30, color: Colors.white,),
-          Icon(Icons.insert_chart, size: 30, color: Colors.white,)
-
         ],
 
         onTap: (int index){

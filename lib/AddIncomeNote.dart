@@ -5,6 +5,13 @@ import 'package:intl/intl.dart';
 
 
 class AddNote extends StatefulWidget {
+
+  final Note note;
+
+  const AddNote({Key key, this.note}) : super(key: key);
+
+
+
   @override
   _AddNoteState createState() => new _AddNoteState();
 }
@@ -22,11 +29,12 @@ class _AddNoteState extends State<AddNote> {
   @override
   void initState() {
     super.initState();
-    title=TextEditingController(text: '');
-    description=TextEditingController(text: '');
-    amount=TextEditingController(text: '');
+    title=TextEditingController(text: isEditing ? widget.note.title : '');
+    description=TextEditingController(text: isEditing ? widget.note.description: '');
+    amount=TextEditingController(text: isEditing ? widget.note.amount : '');
   }
 
+  get isEditing => widget.note != null;
 
 
   @override
@@ -36,7 +44,7 @@ class _AddNoteState extends State<AddNote> {
 
     return new Scaffold(
       appBar: AppBar(
-        title: Text("Add your Data"),
+        title: Text(isEditing ? "Update your data" : "Add your data"),
         backgroundColor: Colors.deepOrange,
       ),
       body: SingleChildScrollView(
@@ -99,7 +107,7 @@ class _AddNoteState extends State<AddNote> {
                   height: 60.0,
                   minWidth: MediaQuery.of(context).size.width/1,
                   child: RaisedButton(
-                      child: Text("SAVE",
+                      child: Text(isEditing ? "UPDATE" : "SAVE",
                       style: TextStyle(
                         fontSize: 20.0,
                         color: Colors.white
@@ -110,15 +118,26 @@ class _AddNoteState extends State<AddNote> {
                     onPressed: ()async{
                         if(_globalKey.currentState.validate()){
                           try{
-                            Note note=Note(
-                                title: title.text,
-                                description: description.text,
-                                amount: amount.text,
-                                date: formateDate
-                            );
-                            Navigator.of(context).pop();
-                            await FirestoreService().addNote(note);
-
+                            if(isEditing){
+                              Note note=Note(
+                                  title: title.text,
+                                  description: description.text,
+                                  amount: amount.text,
+                                  id: widget.note.id,
+                                  date: formateDate
+                              );
+                              Navigator.of(context).pop();
+                              await FirestoreService().updateNote(note);
+                            }else{
+                              Note note=Note(
+                                  title: title.text,
+                                  description: description.text,
+                                  amount: amount.text,
+                                  date: formateDate
+                              );
+                              Navigator.of(context).pop();
+                              await FirestoreService().addNote(note);
+                            }
                           }catch(e){
                             print(e);
                           }
