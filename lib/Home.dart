@@ -50,14 +50,12 @@ class _HomeState extends State<Home> {
           Icon(Icons.remove, size: 30, color: Colors.white,),
           Icon(Icons.add, size: 30, color: Colors.white,),
         ],
-
         onTap: (int index){
           setState(() {
             _selectPage=index;
           });
         },
       ),
-
 
 //      body: StreamBuilder(
 //          stream: FirestoreService().getNote(),
