@@ -68,7 +68,6 @@ class _AddExpenseNote extends State<AddExpenseNote> {
                   },
                 ),
                 SizedBox(height: 10.0,),
-
                 TextFormField(
                   controller: description,
                   maxLines: 5,
@@ -84,7 +83,9 @@ class _AddExpenseNote extends State<AddExpenseNote> {
                     }
                   },
                 ),
+
                 SizedBox(height: 6.0,),
+
                 TextFormField(
                   controller: amount,
                   keyboardType: TextInputType.numberWithOptions(),
@@ -100,7 +101,9 @@ class _AddExpenseNote extends State<AddExpenseNote> {
                     }
                   },
                 ),
+
                 SizedBox(height: 15.0,),
+                
                 ButtonTheme(
                   height: 60.0,
                   minWidth: MediaQuery.of(context).size.width/1,
