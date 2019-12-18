@@ -39,9 +39,7 @@ class _AddExpenseNote extends State<AddExpenseNote> {
 
   @override
   Widget build(BuildContext context) {
-
     String formateDate= new DateFormat.yMMMd().format(_currenttime);
-
     return new Scaffold(
       appBar: AppBar(
         title: Text(isEdating ? "Update Note" : "Add your note"),
