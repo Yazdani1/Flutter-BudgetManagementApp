@@ -103,7 +103,7 @@ class _AddExpenseNote extends State<AddExpenseNote> {
                 ),
 
                 SizedBox(height: 15.0,),
-                
+
                 ButtonTheme(
                   height: 60.0,
                   minWidth: MediaQuery.of(context).size.width/1,
@@ -139,11 +139,9 @@ class _AddExpenseNote extends State<AddExpenseNote> {
                            Navigator.of(context).pop();
                            await FirestoreExpense().addExpenseNote(note);
                          }
-
                         }catch(e){
                           print(e);
                         }
-
                       }
                     },
                   ),
