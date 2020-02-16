@@ -117,12 +117,10 @@ class _ExpenseState extends State<Expense> {
                                                 color: Colors.white
                                             ),),
                                         )
-
                                       ],
                                     ),
                                   ),
                                 ),
-
                                 SizedBox(width: 6.0,),
                                 Expanded(
                                   flex: 2,
